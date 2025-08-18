@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300 py-8 px-6">
-    <div class="w-full max-w-lg bg-white shadow-lg rounded-lg p-8 py-8 px-6">
+<div class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300 p-6">
+    <div class="w-full max-w-lg bg-white shadow-lg rounded-lg p-6">
         <br>
 
         <h1 class="text-3xl font-bold mb-6 text-blue-700 text-center">Mesa de Ayuda</h1>
@@ -40,8 +40,12 @@
                 <textarea name="descripcion" id="descripcion" class="form-textarea w-full rounded border-blue-300" rows="4" required>{{ old('descripcion') }}</textarea>
                 @error('descripcion') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
-            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded w-full font-bold">Enviar</button>
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded w-full font-bold">Enviar</button>
         </form>
+
+
+        <br><br>
+
 
         <!-- Formulario de consulta de estado -->
         <h2 class="text-xl font-bold mb-4 text-blue-700 text-center">Conoce el estado de tu solicitud</h2>
@@ -52,7 +56,7 @@
                 <input type="number" name="consulta_id" id="consulta_id" class="form-input w-full rounded border-blue-300" value="{{ old('consulta_id', $consulta_id) }}" required>
                 @error('consulta_id') <span class="text-red-500">{{ $message }}</span> @enderror
             </div>
-            <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded w-full font-bold">Consultar</button>
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded w-full font-bold">Consultar</button>
         </form>
 
         <!-- Resultado de la consulta -->
