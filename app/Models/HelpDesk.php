@@ -10,6 +10,11 @@ class HelpDesk extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nombre', 'correo', 'telefono', 'titulo', 'descripcion'
+        'nombre',
+        'correo',
+        'telefono',
+        'titulo',
+        'descripcion',
+        'status',
     ];
 }

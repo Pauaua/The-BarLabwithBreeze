@@ -8,7 +8,10 @@ class HelpDeskController extends Controller
 {
     public function create()
     {
-        return view('mesa-de-ayuda');
+        return view('mesa-de-ayuda', [
+            'solicitud' => null,
+            'consulta_id' => null,
+        ]);
     }
 
     public function store(Request $request)
@@ -21,8 +24,31 @@ class HelpDeskController extends Controller
             'descripcion' => 'required|string',
         ]);
 
-        HelpDesk::create($request->all());
+        $helpDesk = HelpDesk::create([
+            'nombre' => $request->nombre,
+            'correo' => $request->correo,
+            'telefono' => $request->telefono,
+            'titulo' => $request->titulo,
+            'descripcion' => $request->descripcion,
+            'status' => 'pendiente',
+        ]);
 
-        return redirect()->route('helpdesk.create')->with('success', 'Solicitud enviada.');
+        return redirect()
+            ->route('helpdesk.create')
+            ->with('success', 'Solicitud enviada. Número de solicitud: ' . $helpDesk->id);
+    }
+
+    public function consulta(Request $request)
+    {
+        $request->validate([
+            'consulta_id' => 'required|integer|min:1',
+        ]);
+
+        $solicitud = \App\Models\HelpDesk::find($request->consulta_id);
+
+        return view('mesa-de-ayuda', [
+            'solicitud' => $solicitud,
+            'consulta_id' => $request->consulta_id,
+        ]);
     }
 }

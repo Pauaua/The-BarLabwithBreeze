@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/mesa-de-ayuda', [HelpDeskController::class, 'create'])->name('helpdesk.create');
 Route::post('/mesa-de-ayuda', [HelpDeskController::class, 'store'])->name('helpdesk.store');
+Route::post('/consulta-solicitud', [HelpDeskController::class, 'consulta'])->name('helpdesk.consulta');
 
 
 

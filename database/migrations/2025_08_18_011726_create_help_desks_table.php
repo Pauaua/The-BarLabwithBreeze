@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('telefono');
             $table->string('titulo');
             $table->text('descripcion');
+            $table->string('status')->default('pendiente');
             $table->timestamps();
         });
     }
