@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HelpDeskController;
 
 
 /*
@@ -35,6 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::get('/mesa-de-ayuda', [HelpDeskController::class, 'create'])->name('helpdesk.create');
+Route::post('/mesa-de-ayuda', [HelpDeskController::class, 'store'])->name('helpdesk.store');
+Route::post('/consulta-solicitud', [HelpDeskController::class, 'consulta'])->name('helpdesk.consulta');
 
 
 /*
