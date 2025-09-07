@@ -18,10 +18,7 @@
             <label for="enrollment_date" class="form-label">Fecha de Inscripción</label>
             <input type="date" name="enrollment_date" id="enrollment_date" class="form-control" value="{{ old('enrollment_date', date('Y-m-d')) }}" required>
         </div>
-        <div class="mb-3">
-            <label for="status" class="form-label">Estado</label>
-            <input type="text" name="status" id="status" class="form-control" value="{{ old('status', 'en curso') }}" required>
-        </div>
+    <!-- El estado se asigna automáticamente como 'en curso' -->
         <button type="submit" class="btn btn-success">Inscribirse</button>
         <a href="{{ route('enrollments.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>

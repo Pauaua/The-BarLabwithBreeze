@@ -10,6 +10,12 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
+                    @if(auth()->user() && auth()->user()->role === 'admin')
+                        <div class="mt-4">
+                            <a href="{{ route('courses.index') }}" class="btn btn-primary me-2">CRUD Cursos</a>
+                            <a href="{{ route('enrollments.index') }}" class="btn btn-secondary">CRUD Inscripciones</a>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

@@ -14,7 +14,6 @@ use App\Http\Controllers\HelpDeskController;
 Route::get('/', function () {
     return view('welcome');
 });
-
 Route::get('/cursos', fn() => view('cursos'))->name('cursos');
 Route::get('/curso-detalle', fn() => view('bartenderprofesional'))->name('curso.detalle');
 Route::get('/nosotros', fn() => view('nosotros'))->name('nosotros');
@@ -47,5 +46,13 @@ Route::post('/consulta-solicitud', [HelpDeskController::class, 'consulta'])->nam
 |--------------------------------------------------------------------------
 | Breeze instala login, register, logout, forgot password, reset password, etc.
 */
+
+
+// CRUD de Courses
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\EnrollmentController;
+
+Route::resource('courses', CourseController::class);
+Route::resource('enrollments', EnrollmentController::class);
 
 require __DIR__.'/auth.php';
