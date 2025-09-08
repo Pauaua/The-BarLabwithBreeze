@@ -19,8 +19,15 @@
     <input type="number" name="duration_weeks" id="duration_weeks" class="form-control" value="{{ old('duration_weeks', $course->duration_weeks ?? '') }}">
 </div>
 <div class="mb-3">
-    <label for="instructor_id" class="form-label">ID Instructor</label>
-    <input type="number" name="instructor_id" id="instructor_id" class="form-control" value="{{ old('instructor_id', $course->instructor_id ?? '') }}">
+    <label for="instructor_id" class="form-label">Instructor</label>
+    <select name="instructor_id" id="instructor_id" class="form-control" required>
+        <option value="">Seleccione un instructor</option>
+        @foreach($instructors as $instructor)
+            <option value="{{ $instructor->id }}" {{ old('instructor_id', $course->instructor_id ?? '') == $instructor->id ? 'selected' : '' }}>
+                {{ $instructor->name }} (ID: {{ $instructor->id }})
+            </option>
+        @endforeach
+    </select>
 </div>
 <div class="mb-3">
     <label for="published_status" class="form-label">Publicado</label>

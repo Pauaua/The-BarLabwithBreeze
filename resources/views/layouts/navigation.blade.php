@@ -38,6 +38,20 @@
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
+                        @if(Auth::user() && Auth::user()->role === 'admin')
+                            <x-dropdown-link :href="route('courses.index')">
+                                {{ __('Administrar Cursos') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('enrollments.index')">
+                                {{ __('Administrar Inscripciones') }}
+                            </x-dropdown-link>
+                        @endif
+                        @if(Auth::user() && in_array(Auth::user()->role, ['student', 'instructor']))
+                            <x-dropdown-link :href="route('enrollments.index')">
+                                {{ __('Mis Inscripciones') }}
+                            </x-dropdown-link>
+                        @endif
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf

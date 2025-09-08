@@ -28,6 +28,9 @@
                 <td>{{ $enrollment->completed_at }}</td>
                 <td>
                     <a href="{{ route('enrollments.show', $enrollment->id) }}" class="btn btn-info btn-sm">Ver</a>
+                    @if(Auth::user() && in_array(Auth::user()->role, ['admin', 'instructor']))
+                        <a href="{{ route('enrollments.edit', $enrollment->id) }}" class="btn btn-warning btn-sm">Editar</a>
+                    @endif
                     <form action="{{ route('enrollments.destroy', $enrollment->id) }}" method="POST" style="display:inline-block;">
                         @csrf
                         @method('DELETE')
