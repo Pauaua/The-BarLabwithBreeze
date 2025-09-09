@@ -4,7 +4,7 @@
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Nombre')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
@@ -18,21 +18,21 @@
 
         <!-- Date of Birth -->
          <div>
-            <x-input-label for="birthdate" :value="__('Date of Birth')" />
+            <x-input-label for="birthdate" :value="__('Fecha de Nacimiento')" />
             <x-text-input id="birthdate" class="block mt-1 w-full" type="date" name="birthdate" :value="old('birthdate')" required autofocus autocomplete="birthdate" />
             <x-input-error :messages="$errors->get('birthdate')" class="mt-2" />        
         </div>
 
         <!-- Email Address -->
         <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label for="email" :value="__('Correo Electrónico')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+            <x-input-label for="password" :value="__('Contraseña')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
@@ -44,7 +44,7 @@
 
         <!-- Confirm Password -->
         <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+            <x-input-label for="password_confirmation" :value="__('Confirma contraseña')" />
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
                             type="password"
@@ -55,7 +55,7 @@
 
         <!-- Asignar rol de usuario -->
          <div>
-            <x-input-label for="role" :value="__('Role')" />
+            <x-input-label for="role" :value="__('Rol')" />
             <select id="role" name="role" class="block mt-1 w-full">
                 <option value="admin" {{ old('role') === 'admin' ? 'selected' : '' }}>Admin</option>
                 <option value="instructor" {{ old('role') === 'instructor' ? 'selected' : '' }}>Instructor</option>
@@ -71,7 +71,7 @@
             </a>
 
             <x-primary-button class="ms-4">
-                {{ __('Register') }}
+                {{ __('Registrar') }}
             </x-primary-button>
         </div>
     </form>

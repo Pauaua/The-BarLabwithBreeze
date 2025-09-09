@@ -35,7 +35,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'rut' => ['string', 'max:12'], // Validate RUT
             'birthdate' => ['required', 'date', 'before:today'],
-            'role' => ['required', 'string', 'in:admin,user']
+            'role' => ['required', 'string', 'in:admin,instructor,student,evaluator']
         ]);
 
         $user = User::create([
