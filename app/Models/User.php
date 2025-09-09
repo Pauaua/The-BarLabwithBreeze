@@ -2,20 +2,18 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * Los atributos que se pueden asignar masivamente.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $fillable = [
         'name',
@@ -23,16 +21,15 @@ class User extends Authenticatable
         'birthdate',
         'email',
         'password',
-        'role', // Added role field
+        'role', // Aseguramos que está aquí
         'email_verified_at',
         'remember_token',
-
     ];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * Los atributos que deben ocultarse para la serialización.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -40,7 +37,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * Mutaciones de atributos.
      *
      * @return array<string, string>
      */
@@ -49,19 +46,87 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'role' => 'string', // Asegura que el rol sea string
         ];
     }
+
+    /**
+     * Valor por defecto para el campo 'role'.
+     *
+     * @return array<string, mixed>
+     */
+    protected $attributes = [
+        'role' => 'student', // Valor por defecto
+    ];
+
+    // -----------------------------
+    // Métodos auxiliares para roles
+    // -----------------------------
+
+    /**
+     * Verifica si el usuario tiene un rol específico.
+     *
+     * @param string $role
+     * @return bool
+     */
+    public function hasRole(string $role): bool
+    {
+        return $this->role === $role;
+    }
+
+    /**
+     * Verifica si el usuario es admin.
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('admin');
+    }
+
+    /**
+     * Verifica si el usuario es instructor.
+     *
+     * @return bool
+     */
+    public function isInstructor(): bool
+    {
+        return $this->hasRole('instructor');
+    }
+
+    /**
+     * Verifica si el usuario es estudiante.
+     *
+     * @return bool
+     */
+    public function isStudent(): bool
+    {
+        return $this->hasRole('student');
+    }
+
+    // -----------------------------
     // Relaciones
+    // -----------------------------
+
+    /**
+     * Cursos donde el usuario es instructor.
+     */
     public function coursesAsInstructor()
     {
         return $this->hasMany(Course::class, 'instructor_id');
     }
 
+    /**
+     * Inscripciones del usuario.
+     */
     public function enrollments()
     {
         return $this->hasMany(Enrollment::class);
     }
 
+    /**
+     * Cursos a los que el usuario está inscrito.
+     */
     public function courses()
     {
         return $this->belongsToMany(Course::class, 'enrollments');
