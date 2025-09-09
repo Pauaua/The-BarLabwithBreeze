@@ -14,23 +14,13 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
+    <body class="font-sans antialiased bg-gray-100 dark:bg-gray-900">
+        <!-- Incluye tu navbar personalizado -->
+        @include('components.navbar')
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
-            @endisset
-
-            <!-- Page Content -->
-            <main>
-                @yield('content')
-            </main>
-        </div>
+        <!-- Contenido de la página (dashboard, etc.) -->
+        <main class="pt-16"> <!-- Ajuste para que el contenido no se oculte bajo el navbar fijo -->
+            {{ $slot }}
+        </main>
     </body>
 </html>
