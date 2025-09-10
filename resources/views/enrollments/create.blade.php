@@ -1,6 +1,4 @@
-@extends('layout')
-
-@section('content')
+<x-app-layout>
 <div class="container">
     <h1>Inscribirse a un Curso</h1>
     <form action="{{ route('enrollments.store') }}" method="POST">
@@ -23,4 +21,4 @@
         <a href="{{ route('enrollments.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
-@endsection
+</x-app-layout>

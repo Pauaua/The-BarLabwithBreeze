@@ -1,6 +1,4 @@
-@extends('layout')
-
-@section('content')
+<x-app-layout>
 <div class="d-flex justify-content-between align-items-center mb-3">
   <h1>Usuarios</h1>
   <a class="btn btn-primary" href="{{ route('admin.users.create') }}">Nuevo</a>
@@ -40,4 +38,4 @@
 </table>
 
 {{ $users->links() }}
-@endsection
+</x-app-layout>

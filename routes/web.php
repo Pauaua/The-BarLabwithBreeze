@@ -63,18 +63,18 @@ Route::post('/helpdesk/consulta', [\App\Http\Controllers\HelpDeskController::cla
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
     Route::get('/admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
+    Route::get('/admin/users/{user}', [UserController::class, 'show'])->name('admin.users.show');
     Route::post('/admin/users', [UserController::class, 'store'])->name('admin.users.store');
     Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
     Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
     Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 });
 
-/*
-|--------------------------------------------------------------------------
-| Rutas de autenticación Breeze
-|--------------------------------------------------------------------------
-*/
-Route::resource('courses', CourseController::class);
-Route::resource('enrollments', EnrollmentController::class);
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::resource('courses', CourseController::class);
+    Route::resource('enrollments', EnrollmentController::class);
+    Route::resource('resources', \App\Http\Controllers\ResourceController::class);
+});
 
 require __DIR__.'/auth.php';

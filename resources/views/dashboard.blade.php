@@ -36,16 +36,31 @@
                                 Mesa de Ayuda
                             </a>
                         </li>
+                        <li>
+                            <a href="#" class="block py-2 px-4 rounded hover:bg-gray-700" data-tab="resources">
+                                Recursos
+                            </a>
+                        </li>
                     @elseif($role === 'instructor')
                         <li>
                             <a href="#" class="block py-2 px-4 rounded hover:bg-gray-700 active" data-tab="courses">
                                 Mis Cursos
                             </a>
                         </li>
+                        <li>
+                            <a href="#" class="block py-2 px-4 rounded hover:bg-gray-700" data-tab="resources">
+                                Recursos
+                            </a>
+                        </li>
                     @elseif($role === 'student')
                         <li>
                             <a href="#" class="block py-2 px-4 rounded hover:bg-gray-700 active" data-tab="courses">
                                 Mis Cursos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="block py-2 px-4 rounded hover:bg-gray-700" data-tab="resources">
+                                Recursos
                             </a>
                         </li>
                     @endif
@@ -66,17 +81,14 @@
 
         <!-- Contenido principal -->
         <div class="flex-1 ml-64 p-6">
-            @if(auth()->user() && auth()->user()->role === 'admin')
-                <div class="mt-4 mb-6">
-                    <a href="{{ route('courses.index') }}" class="btn btn-primary me-2 bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition">CRUD Cursos</a>
-                    <a href="{{ route('enrollments.index') }}" class="btn btn-secondary bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded transition">CRUD Inscripciones</a>
-                </div>
-            @endif
+            @php
+                $role = Auth::user()->role;
+            @endphp
 
             @if($role === 'admin')
+                <!-- Usuarios -->
                 <div id="users-content" class="content-tab">
                     <h3 class="text-2xl font-medium text-gray-800 dark:text-gray-200 mb-4">Usuarios</h3>
-                    <!-- Botón agregar usuario -->
                     <a href="{{ route('admin.users.create') }}"
                         class="mb-4 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition">
                         + Agregar Usuario
@@ -114,16 +126,15 @@
                 </div>
             @endif
 
+            <!-- Cursos -->
             <div id="courses-content" class="content-tab {{ $role !== 'admin' ? '' : 'hidden' }}">
                 <h3 class="text-2xl font-medium text-gray-800 dark:text-gray-200 mb-4">Cursos</h3>
                 @if($role === 'admin' || $role === 'instructor')
-                    <!-- Botón agregar curso -->
                     <a href="{{ route('courses.create') }}"
                         class="mb-4 inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition">
                         + Agregar Curso
                     </a>
                 @elseif($role === 'student')
-                    <!-- Botón inscribirse en curso -->
                     <a href="{{ route('enrollments.create') }}"
                         class="mb-4 inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition">
                         + Inscribirse en Curso
@@ -160,9 +171,9 @@
             </div>
 
             @if($role === 'admin')
+                <!-- Inscripciones -->
                 <div id="enrollments-content" class="content-tab hidden">
                     <h3 class="text-2xl font-medium text-gray-800 dark:text-gray-200 mb-4">Inscripciones</h3>
-                    <!-- Botón agregar inscripción -->
                     <a href="{{ route('enrollments.create') }}"
                         class="mb-4 inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded transition">
                         + Agregar Inscripción
@@ -197,9 +208,9 @@
                     </div>
                 </div>
 
+                <!-- Mesa de Ayuda -->
                 <div id="helpdesk-content" class="content-tab hidden">
                     <h3 class="text-2xl font-medium text-gray-800 dark:text-gray-200 mb-4">Mesa de Ayuda</h3>
-                    <!-- Botón agregar ticket -->
                     <a href="{{ route('helpdesk.create') }}"
                         class="mb-4 inline-block bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded transition">
                         + Nuevo Ticket
@@ -216,7 +227,7 @@
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
                                 @forelse ($helpdesk ?? [] as $ticket)
                                     <tr>
-                                        <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-300">{{ $ticket->subject }}</td>
+                                        <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-300">{{ $ticket->titulo ?? $ticket->subject }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm">
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
                                                 {{ ucfirst($ticket->status) }}
@@ -238,6 +249,59 @@
                     </div>
                 </div>
             @endif
+
+            <!-- Recursos -->
+            <div id="resources-content" class="content-tab hidden">
+                <h3 class="text-2xl font-medium text-gray-800 dark:text-gray-200 mb-4">Material de Apoyo</h3>
+                @if($role === 'admin' || $role === 'instructor')
+                    <a href="{{ route('resources.create') }}"
+                        class="mb-4 inline-block bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded transition">
+                        + Agregar Recurso
+                    </a>
+                @endif
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Título</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Curso</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Archivo</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            @forelse ($resources ?? [] as $resource)
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">{{ $resource->titulo }}</td>
+                                    <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-300">{{ $resource->course?->titulo ?? '-' }}</td>
+                                    <td class="px-6 py-4">
+                                        <a href="{{ asset('storage/' . $resource->archivo) }}" target="_blank" class="btn btn-sm btn-outline-secondary">
+                                            Descargar
+                                        </a>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <a href="{{ route('resources.show', $resource) }}" class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 me-2">Ver</a>
+                                        @if($role === 'admin' || $role === 'instructor')
+                                            <a href="{{ route('resources.edit', $resource) }}" class="text-warning-600 hover:text-warning-900 dark:text-yellow-400 me-2">Editar</a>
+                                            <form action="{{ route('resources.destroy', $resource) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="text-red-600 hover:text-red-900 dark:text-red-400 bg-transparent border-0 p-0" onclick="return confirm('¿Eliminar recurso?')">Eliminar</button>
+                                            </form>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
+                                        No hay recursos disponibles.
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
                        
