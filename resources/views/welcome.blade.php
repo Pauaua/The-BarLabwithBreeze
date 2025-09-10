@@ -219,6 +219,7 @@
             </div>
         </div>
     </section>
+        @include('components.helpdeskbaner')
         @include('components.footer')
 
         @if (Route::has('login'))
