@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -24,12 +26,20 @@ class UserController extends Controller
         return view('admin.users.create');
     }
 
-    public function store(StoreUserRequest $request)
+    public function store(Request $request)
     {
-        $data = $request->validated();
-        // Si no usas mutator, haz: $data['password'] = bcrypt($data['password']);
-        User::create($data);
-        return redirect()->route('admin.users.index')->with('status','Usuario creado');
+
+        $user = User::create([
+            'name' => $request->name,
+            'rut' => $request->rut,
+            'birthdate' => $request->birthdate,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'role' => $request->role,
+        ]);
+
+
+        return redirect()->route('dashboard')->with('status','Usuario creado');
     }
 
     public function show(User $user)

@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="max-w-xl mx-auto mt-8 bg-white dark:bg-gray-900 p-8 rounded shadow">
-        <h1 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-100">Editar Usuario</h1>
+        <h1 class="text-2xl font-bold mb-6 text-gray-800 dark:text-white-100">Editar Usuario</h1>
         <form method="POST" action="{{ route('admin.users.update', $user) }}">
             @csrf
             @method('PUT')

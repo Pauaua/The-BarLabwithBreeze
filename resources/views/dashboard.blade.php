@@ -90,8 +90,8 @@
                 <div id="users-content" class="content-tab">
                     <h3 class="text-2xl font-medium text-gray-800 dark:text-gray-200 mb-4">Usuarios</h3>
                     <a href="{{ route('admin.users.create') }}"
-                        class="mb-4 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition">
-                        + Agregar Usuario
+                    class="mb-4 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition">
+                    + Agregar Usuario
                     </a>
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
@@ -100,6 +100,7 @@
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Nombre</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Email</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Rol</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -112,10 +113,18 @@
                                                 {{ ucfirst($user->role) }}
                                             </span>
                                         </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="{{ route('admin.users.edit', $user) }}" class="text-yellow-600 hover:text-yellow-900 dark:text-yellow-400 me-2">Editar</a>
+                                            <form action="{{ route('admin.users.destroy', $user) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="text-red-600 hover:text-red-900 dark:text-red-400 bg-transparent border-0 p-0" onclick="return confirm('¿Eliminar usuario?')">Eliminar</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3" class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
+                                        <td colspan="4" class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
                                             No hay usuarios registrados.
                                         </td>
                                     </tr>
@@ -128,10 +137,10 @@
 
             <!-- Cursos -->
             <div id="courses-content" class="content-tab {{ $role !== 'admin' ? '' : 'hidden' }}">
-                <h3 class="text-2xl font-medium text-gray-800 dark:text-gray-200 mb-4">Cursos</h3>
+                <h3 class="text-2xl font-medium text-dark-800 dark:text-gray-200 mb-4">Cursos</h3>
                 @if($role === 'admin' || $role === 'instructor')
                     <a href="{{ route('courses.create') }}"
-                        class="mb-4 inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition">
+                        class="mb-4 inline-block bg-blue-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition">
                         + Agregar Curso
                     </a>
                 @elseif($role === 'student')
@@ -146,7 +155,7 @@
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Título</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Descripción</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Acción</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Acciones</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -155,7 +164,12 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-white">{{ $course->title }}</td>
                                     <td class="px-6 py-4 text-sm text-gray-500 dark:text-gray-300">{{ Str::limit($course->description, 60) }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="{{ route('courses.show', $course) }}" class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400">Ver</a>
+                                        <a href="{{ route('courses.edit', $course) }}" class="text-yellow-600 hover:text-yellow-900 dark:text-yellow-400 me-2">Editar</a>
+                                        <form action="{{ route('courses.destroy', $course) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="text-red-600 hover:text-red-900 dark:text-red-400 bg-transparent border-0 p-0" onclick="return confirm('¿Eliminar curso?')">Eliminar</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty
@@ -175,7 +189,7 @@
                 <div id="enrollments-content" class="content-tab hidden">
                     <h3 class="text-2xl font-medium text-gray-800 dark:text-gray-200 mb-4">Inscripciones</h3>
                     <a href="{{ route('enrollments.create') }}"
-                        class="mb-4 inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded transition">
+                        class="mb-4 inline-block bg-blue-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded transition">
                         + Agregar Inscripción
                     </a>
                     <div class="overflow-x-auto">
@@ -185,6 +199,7 @@
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Estudiante</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Curso</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Fecha</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -195,10 +210,18 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                                             {{ $enrollment->created_at->format('d/m/Y') }}
                                         </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="{{ route('enrollments.edit', $enrollment) }}" class="text-yellow-600 hover:text-yellow-900 dark:text-yellow-400 me-2">Editar</a>
+                                            <form action="{{ route('enrollments.destroy', $enrollment) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="text-red-600 hover:text-red-900 dark:text-red-400 bg-transparent border-0 p-0" onclick="return confirm('¿Eliminar inscripción?')">Eliminar</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3" class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
+                                        <td colspan="4" class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
                                             No hay inscripciones.
                                         </td>
                                     </tr>
@@ -222,6 +245,7 @@
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Asunto</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Estado</th>
                                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Fecha</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -236,10 +260,18 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">
                                             {{ $ticket->created_at->format('d/m/Y') }}
                                         </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                            <a href="{{ route('helpdesk.edit', $ticket) }}" class="text-yellow-600 hover:text-yellow-900 dark:text-yellow-400 me-2">Editar</a>
+                                            <form action="{{ route('helpdesk.destroy', $ticket) }}" method="POST" style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="text-red-600 hover:text-red-900 dark:text-red-400 bg-transparent border-0 p-0" onclick="return confirm('¿Eliminar ticket?')">Eliminar</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="3" class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
+                                        <td colspan="4" class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">
                                             No hay tickets en la mesa de ayuda.
                                         </td>
                                     </tr>
@@ -280,15 +312,12 @@
                                         </a>
                                     </td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                        <a href="{{ route('resources.show', $resource) }}" class="text-indigo-600 hover:text-indigo-900 dark:text-indigo-400 me-2">Ver</a>
-                                        @if($role === 'admin' || $role === 'instructor')
-                                            <a href="{{ route('resources.edit', $resource) }}" class="text-warning-600 hover:text-warning-900 dark:text-yellow-400 me-2">Editar</a>
-                                            <form action="{{ route('resources.destroy', $resource) }}" method="POST" style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="text-red-600 hover:text-red-900 dark:text-red-400 bg-transparent border-0 p-0" onclick="return confirm('¿Eliminar recurso?')">Eliminar</button>
-                                            </form>
-                                        @endif
+                                        <a href="{{ route('resources.edit', $resource) }}" class="text-warning-600 hover:text-warning-900 dark:text-yellow-400 me-2">Editar</a>
+                                        <form action="{{ route('resources.destroy', $resource) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="text-red-600 hover:text-red-900 dark:text-red-400 bg-transparent border-0 p-0" onclick="return confirm('¿Eliminar recurso?')">Eliminar</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @empty
@@ -304,8 +333,6 @@
             </div>
         </div>
     </div>
-                       
-
     <!-- Scripts -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
