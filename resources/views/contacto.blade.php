@@ -1,6 +1,4 @@
-@extends('layout')
-
-@section('content')
+<x-app-layout>
     <style>
         body {
             background: #380516 !important;
@@ -22,8 +20,8 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            padding-top: 80px;   /* Ajusta según la altura de tu navbar */
-            padding-bottom: 80px;/* Ajusta según la altura de tu footer */
+            padding-top: 80px;
+            padding-bottom: 80px;
         }
         .quienes-bg {
             position: absolute;
@@ -75,5 +73,4 @@
             <img class="logo-barlab" src="assets/logo5.png" alt="logo">
         </div>
     </div>
-    
-@endsection
+</x-app-layout>

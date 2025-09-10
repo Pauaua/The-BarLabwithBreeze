@@ -1,6 +1,4 @@
-@extends('layout')
-
-@section('content')
+<x-app-layout>
 <div class="container">
     <h1>Detalle del Curso</h1>
     <div class="card">
@@ -18,4 +16,4 @@
         </div>
     </div>
 </div>
-@endsection
+</x-app-layout>

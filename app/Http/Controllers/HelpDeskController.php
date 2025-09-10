@@ -2,13 +2,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\HelpDesk; // Importa el modelo
+use App\Models\HelpDesk;
 
 class HelpDeskController extends Controller
 {
     public function create()
     {
-        return view('mesa-de-ayuda', [
+        // Siempre retorna la vista principal, sin consulta previa
+        return view('helpdesk', [
             'solicitud' => null,
             'consulta_id' => null,
         ]);
@@ -33,6 +34,7 @@ class HelpDeskController extends Controller
             'status' => 'pendiente',
         ]);
 
+        // Redirige a la misma vista con mensaje de éxito
         return redirect()
             ->route('helpdesk.create')
             ->with('success', 'Solicitud enviada. Número de solicitud: ' . $helpDesk->id);
@@ -44,9 +46,10 @@ class HelpDeskController extends Controller
             'consulta_id' => 'required|integer|min:1',
         ]);
 
-        $solicitud = \App\Models\HelpDesk::find($request->consulta_id);
+        $solicitud = HelpDesk::find($request->consulta_id);
 
-        return view('mesa-de-ayuda', [
+        // Retorna la misma vista, mostrando el resultado de la consulta
+        return view('helpdesk', [
             'solicitud' => $solicitud,
             'consulta_id' => $request->consulta_id,
         ]);

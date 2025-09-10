@@ -1,6 +1,5 @@
-@extends('layout')
+<x-app-layout>
 
-@section('content')
 <div class="container">
     <h1>Cursos</h1>
     <a href="{{ route('courses.create') }}" class="btn btn-primary mb-3">Crear Curso</a>
@@ -50,4 +49,4 @@
         </tbody>
     </table>
 </div>
-@endsection
+</x-app-layout>

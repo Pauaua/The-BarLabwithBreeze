@@ -1,6 +1,5 @@
-@extends('layout')
+<x-app-layout>
 
-@section('content')
 <div class="container">
     <h1>Editar Curso</h1>
     <form action="{{ route('courses.update', $course->id) }}" method="POST">
@@ -11,4 +10,4 @@
         <a href="{{ route('courses.index') }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
-@endsection
+</x-app-layout>

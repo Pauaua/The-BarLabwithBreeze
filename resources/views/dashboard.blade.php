@@ -66,9 +66,21 @@
 
         <!-- Contenido principal -->
         <div class="flex-1 ml-64 p-6">
+            @if(auth()->user() && auth()->user()->role === 'admin')
+                <div class="mt-4 mb-6">
+                    <a href="{{ route('courses.index') }}" class="btn btn-primary me-2 bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition">CRUD Cursos</a>
+                    <a href="{{ route('enrollments.index') }}" class="btn btn-secondary bg-gray-700 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded transition">CRUD Inscripciones</a>
+                </div>
+            @endif
+
             @if($role === 'admin')
                 <div id="users-content" class="content-tab">
                     <h3 class="text-2xl font-medium text-gray-800 dark:text-gray-200 mb-4">Usuarios</h3>
+                    <!-- Botón agregar usuario -->
+                    <a href="{{ route('admin.users.create') }}"
+                        class="mb-4 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition">
+                        + Agregar Usuario
+                    </a>
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                             <thead class="bg-gray-50 dark:bg-gray-700">
@@ -104,6 +116,19 @@
 
             <div id="courses-content" class="content-tab {{ $role !== 'admin' ? '' : 'hidden' }}">
                 <h3 class="text-2xl font-medium text-gray-800 dark:text-gray-200 mb-4">Cursos</h3>
+                @if($role === 'admin' || $role === 'instructor')
+                    <!-- Botón agregar curso -->
+                    <a href="{{ route('courses.create') }}"
+                        class="mb-4 inline-block bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition">
+                        + Agregar Curso
+                    </a>
+                @elseif($role === 'student')
+                    <!-- Botón inscribirse en curso -->
+                    <a href="{{ route('enrollments.create') }}"
+                        class="mb-4 inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition">
+                        + Inscribirse en Curso
+                    </a>
+                @endif
                 <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead class="bg-gray-50 dark:bg-gray-700">
@@ -137,6 +162,11 @@
             @if($role === 'admin')
                 <div id="enrollments-content" class="content-tab hidden">
                     <h3 class="text-2xl font-medium text-gray-800 dark:text-gray-200 mb-4">Inscripciones</h3>
+                    <!-- Botón agregar inscripción -->
+                    <a href="{{ route('enrollments.create') }}"
+                        class="mb-4 inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded transition">
+                        + Agregar Inscripción
+                    </a>
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                             <thead class="bg-gray-50 dark:bg-gray-700">
@@ -169,6 +199,11 @@
 
                 <div id="helpdesk-content" class="content-tab hidden">
                     <h3 class="text-2xl font-medium text-gray-800 dark:text-gray-200 mb-4">Mesa de Ayuda</h3>
+                    <!-- Botón agregar ticket -->
+                    <a href="{{ route('helpdesk.create') }}"
+                        class="mb-4 inline-block bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded transition">
+                        + Nuevo Ticket
+                    </a>
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                             <thead class="bg-gray-50 dark:bg-gray-700">

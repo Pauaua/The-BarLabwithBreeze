@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cursos | The Bar Lab</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<x-app-layout>
+    <x-slot name="header">
+        <title>Cursos | The Bar Lab</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    </x-slot>
     <style>
         html, body {
             height: 100%;
@@ -53,7 +51,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center; /* <-- centra el texto */
+            text-align: center;
         }
         .course-card img {
             width: 180px;
@@ -69,7 +67,7 @@
             text-shadow: 1px 1px 6px #000;
             margin-bottom: 0;
             margin-top: 0.5rem;
-            text-align: center; /* <-- centra el texto */
+            text-align: center;
             width: 100%;
         }
         .course-title span {
@@ -102,7 +100,7 @@
             display: inline-block;
             width: 100%;
             font-size: 1.2rem;
-            margin: 0 0 2.5rem 0; /* agrega espacio inferior */
+            margin: 0 0 2.5rem 0;
         }
         .course-link {
             text-decoration: none;
@@ -132,96 +130,91 @@
             flex-shrink: 0;
         }
     </style>
-</head>
-<body>
-    @include('Components/navbar')
-    <div class="section-title">
-    </div>
+    <div class="section-title"></div>
     <div class="study-hero">
-    <section class="courses-section">
-        <div class="courses-inner">
-            <h1>ESTUDIA CON NOSOTROS</h1>
-            <p>Conviértete en bartender y descubre el fascinante mundo de la coctelería junto a TheBarLab</p>
-            <div class="container-fluid">
-                <div class="row g-4 justify-content-center">
-                    <div class="col-12 col-sm-4">
-                        <a href="/curso-detalle" class="course-link">
-                            <div class="course-card">
-                                <img src="assets/bartender1.jpg" alt="Bartender Profesional">
-                                <div class="course-title">Bartender Profesional</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-12 col-sm-4">
-                        <a href="/cursos" class="course-link">
-                            <div class="course-card">
-                                <img src="assets/bartender2.jpg" alt="Curso Barista">
-                                <div class="course-title">Curso Barista</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-12 col-sm-4">
-                        <a href="/cursos" class="course-link">
-                            <div class="course-card">
-                                <img src="assets/bartender3.jpg" alt="Curso de Fermentación">
-                                <div class="course-title">Curso de Fermentación</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-12 col-sm-4">
-                        <a href="/cursos" class="course-link">
-                            <div class="course-card">
-                                <img src="assets/bartender4.jpg" alt="Curso de Destilación">
-                                <div class="course-title">Curso de Destilación</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-12 col-sm-4">
-                        <a href="/cursos" class="course-link">
-                            <div class="course-card">
-                                <img src="assets/bartender5.jpg" alt="Bartender Profesional">
-                                <div class="course-title">Bartender Profesional</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-12 col-sm-4">
-                        <a href="/cursos" class="course-link">
-                            <div class="course-card">
-                                <img src="assets/bartender6.png" alt="Bar Academy On Tour">
-                                <div class="course-title">Especialización en Cerveza</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-12 col-sm-4">
-                        <a href="/cursos" class="course-link">
-                            <div class="course-card">
-                                <img src="assets/bartender7.jpg" alt="Master en Mixología">
-                                <div class="course-title">Master en Mixología</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-12 col-sm-4">
-                        <a href="/cursos" class="course-link">
-                            <div class="course-card">
-                                <img src="assets/bartender8.jpg" alt="Bar Foodie">
-                                <div class="course-title">Bar Foodie</div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-12 col-sm-4">
-                        <a href="/cursos" class="course-link">
-                            <div class="course-card">
-                                <img src="assets/bartender9.jpg" alt="Curso Inicial de Vinos">
-                                <div class="course-title">Curso Inicial de Vinos</div>
-                            </div>
-                        </a>
+        <section class="courses-section">
+            <div class="courses-inner">
+                <h1>ESTUDIA CON NOSOTROS</h1>
+                <p>Conviértete en bartender y descubre el fascinante mundo de la coctelería junto a TheBarLab</p>
+                <div class="container-fluid">
+                    <div class="row g-4 justify-content-center">
+                        <div class="col-12 col-sm-4">
+                            <a href="/curso-detalle" class="course-link">
+                                <div class="course-card">
+                                    <img src="assets/bartender1.jpg" alt="Bartender Profesional">
+                                    <div class="course-title">Bartender Profesional</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <a href="/cursos" class="course-link">
+                                <div class="course-card">
+                                    <img src="assets/bartender2.jpg" alt="Curso Barista">
+                                    <div class="course-title">Curso Barista</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <a href="/cursos" class="course-link">
+                                <div class="course-card">
+                                    <img src="assets/bartender3.jpg" alt="Curso de Fermentación">
+                                    <div class="course-title">Curso de Fermentación</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <a href="/cursos" class="course-link">
+                                <div class="course-card">
+                                    <img src="assets/bartender4.jpg" alt="Curso de Destilación">
+                                    <div class="course-title">Curso de Destilación</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <a href="/cursos" class="course-link">
+                                <div class="course-card">
+                                    <img src="assets/bartender5.jpg" alt="Bartender Profesional">
+                                    <div class="course-title">Bartender Profesional</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <a href="/cursos" class="course-link">
+                                <div class="course-card">
+                                    <img src="assets/bartender6.png" alt="Bar Academy On Tour">
+                                    <div class="course-title">Especialización en Cerveza</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <a href="/cursos" class="course-link">
+                                <div class="course-card">
+                                    <img src="assets/bartender7.jpg" alt="Master en Mixología">
+                                    <div class="course-title">Master en Mixología</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <a href="/cursos" class="course-link">
+                                <div class="course-card">
+                                    <img src="assets/bartender8.jpg" alt="Bar Foodie">
+                                    <div class="course-title">Bar Foodie</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <a href="/cursos" class="course-link">
+                                <div class="course-card">
+                                    <img src="assets/bartender9.jpg" alt="Curso Inicial de Vinos">
+                                    <div class="course-title">Curso Inicial de Vinos</div>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    @include('Components/footer')
+        </section>
+    </div>
+    @include('components.footer')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</x-app-layout>

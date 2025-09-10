@@ -54,16 +54,19 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+// Mesa de ayuda 
+Route::get('/helpdesk', [\App\Http\Controllers\HelpDeskController::class, 'create'])->name('helpdesk.create');
+Route::post('/helpdesk', [\App\Http\Controllers\HelpDeskController::class, 'store'])->name('helpdesk.store');
+Route::post('/helpdesk/consulta', [\App\Http\Controllers\HelpDeskController::class, 'consulta'])->name('helpdesk.consulta');
 
-Route::get('/mesa-de-ayuda', [HelpDeskController::class, 'create'])->name('helpdesk.create');
-Route::post('/mesa-de-ayuda', [HelpDeskController::class, 'store'])->name('helpdesk.store');
-Route::post('/consulta-solicitud', [HelpDeskController::class, 'consulta'])->name('helpdesk.consulta');
-
-// Rutas de administrador
+// CRUD de usuarios admin
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/admin/users', [UserController::class, 'index'])
-         ->name('admin.users.index')
-         ->middleware('role.admin');
+    Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::get('/admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
+    Route::post('/admin/users', [UserController::class, 'store'])->name('admin.users.store');
+    Route::get('/admin/users/{user}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}', [UserController::class, 'update'])->name('admin.users.update');
+    Route::delete('/admin/users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 });
 
 /*
@@ -71,7 +74,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 | Rutas de autenticación Breeze
 |--------------------------------------------------------------------------
 */
-
 Route::resource('courses', CourseController::class);
 Route::resource('enrollments', EnrollmentController::class);
 
