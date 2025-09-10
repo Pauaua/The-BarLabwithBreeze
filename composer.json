@@ -34,9 +34,7 @@
         }
     },
     "scripts": {
-        "post-install-cmd": [
-            "php artisan optimize:clear"
-        ],
+        
         "post-autoload-dump": [
             "@php artisan config:clear",
             "@php artisan clear-compiled",
